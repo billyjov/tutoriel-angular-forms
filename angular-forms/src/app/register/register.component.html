@@ -78,8 +78,57 @@
         </div>
       </div>
 
+      <div class="form-row mb-3">
+        <div class="col-md-12">
+          <div class="form-check mt-4 pt-3">
+            <label for="sendCatalogId" class="form-check-label">
+              <input type="checkbox" class="form-check-input" name="sendCatalog" [(ngModel)]="user.sendCatalog">
+              Oui je souhaite recevoir la pub
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="user.sendCatalog">
+
+        <div class="form-row mb-3">
+          <div class="col-md-12">
+            <label for="">Adresse 1</label>
+            <input type="text" class="form-control">
+          </div>
+        </div>
+        <div class="form-row mb-3">
+          <div class="col-md-12">
+            <label for="">Adresse 2</label>
+            <input type="text" class="form-control">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col-md-6 mb-3">
+            <label for="">Ville</label>
+            <input type="text" class="form-control">
+          </div>
+          <div class="col-md-3 mb-3">
+            <label for="">Departement</label>
+            <select class="form-control">
+              <option value="">Selectionner un département</option>
+              <option value="A">A</option>
+              <option value="A">B</option>
+              <option value="A">C</option>
+              <option value="A">D</option>
+            </select>
+          </div>
+          <div class="col-md-3 md-3">
+            <label for="">Code postal</label>
+            <input type="number" class="form-control">
+          </div>
+        </div>
+      </div>
+
       <div class="text-right">
-        <button class="btn btn-info" type="submit">Sauvegarder</button>
+        <button class="btn btn-info" type="submit"
+        [disabled]="!registerForm.valid">Sauvegarder</button>
       </div>
     </form>
   </div>
