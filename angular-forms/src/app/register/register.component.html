@@ -13,11 +13,15 @@
             required
             minlength="4"
             [ngClass]="{
-              'is-invalid': registerForm.get('lastName').touched && !registerForm.get('lastName').valid
+              'is-invalid':
+                registerForm.get('lastName').touched &&
+                !registerForm.get('lastName').valid
             }"
           />
           <div class="invalid-feedback">
-            <span *ngIf="registerForm.get('lastName').errors?.required"> Entrez votre nom </span>
+            <span *ngIf="registerForm.get('lastName').errors?.required">
+              Entrez votre nom
+            </span>
             <span *ngIf="registerForm.get('lastName').errors?.minlength">
               Minimum 4 charactères
             </span>
@@ -33,7 +37,9 @@
             required
             maxlength="20"
             [ngClass]="{
-              'is-invalid': registerForm.get('firstName').touched && !registerForm.get('firstName').valid
+              'is-invalid':
+                registerForm.get('firstName').touched &&
+                !registerForm.get('firstName').valid
             }"
           />
 
@@ -58,7 +64,9 @@
             required
             email
             [ngClass]="{
-              'is-invalid': registerForm.get('email').touched && !registerForm.get('email').valid
+              'is-invalid':
+                registerForm.get('email').touched &&
+                !registerForm.get('email').valid
             }"
           />
           <div class="invalid-feedback">
@@ -76,7 +84,11 @@
         <div class="col-md-12">
           <div class="form-check mt-4 pt-3">
             <label for="sendCatalogId" class="form-check-label">
-              <input type="checkbox" class="form-check-input" formControlName="sendCatalog">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                formControlName="sendCatalog"
+              />
               Oui je souhaite recevoir la pub
             </label>
           </div>
@@ -121,18 +133,30 @@
       </div> -->
 
       <div class="text-right">
-        <button class="btn btn-info" type="submit"
-        [disabled]="!registerForm.valid">Sauvegarder</button>
+        <button
+          type="button"
+          class="btn btn-outline-info mr-2"
+          (click)="fillFormData()"
+        >
+          Remplir les champs par défaut
+        </button>
+        <button
+          class="btn btn-info"
+          type="submit"
+          [disabled]="!registerForm.valid"
+        >
+          Sauvegarder
+        </button>
       </div>
     </form>
   </div>
 </div>
 
-<hr>
+<hr />
 
-<p> Dirty: {{ registerForm.dirty }} </p>
-<p> Pristine: {{ registerForm.pristine }} </p>
-<p> Valid: {{ registerForm.valid }} </p>
-<p> InValid: {{ registerForm.invalid }} </p>
-<p> Value: </p>
-<pre>{{ registerForm.value | json  }} </pre>
+<p>Dirty: {{ registerForm.dirty }}</p>
+<p>Pristine: {{ registerForm.pristine }}</p>
+<p>Valid: {{ registerForm.valid }}</p>
+<p>InValid: {{ registerForm.invalid }}</p>
+<p>Value:</p>
+<pre>{{ registerForm.value | json }} </pre>
