@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from './user';
 
 @Component({
@@ -16,9 +16,11 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
-      firstName: [''],
-      lastName: '',
-      email: '',
+      firstName: ['', [Validators.required, Validators.maxLength(40)]],
+      lastName: ['', [Validators.required, Validators.minLength(4)]],
+      email: ['', [Validators.required, Validators.email]],
+      phone: '',
+      notification: 'email',
       sendCatalog: false
     });
   }
@@ -35,5 +37,18 @@ export class RegisterComponent implements OnInit {
       lastName: 'Doe B',
       sendCatalog: true
     });
+  }
+
+  public setNotificationSetting(method: string): void {
+    const phoneControl = this.registerForm.get('phone');
+
+    if (method === 'text') {
+      phoneControl.setValidators(Validators.required);
+    } else {
+      phoneControl.clearValidators();
+    }
+
+    phoneControl.updateValueAndValidity();
+
   }
 }

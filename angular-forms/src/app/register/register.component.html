@@ -10,8 +10,6 @@
             class="form-control"
             placeholder="Nom"
             formControlName="lastName"
-            required
-            minlength="4"
             [ngClass]="{
               'is-invalid':
                 registerForm.get('lastName').touched &&
@@ -34,8 +32,6 @@
             class="form-control"
             placeholder="Prenom"
             formControlName="firstName"
-            required
-            maxlength="20"
             [ngClass]="{
               'is-invalid':
                 registerForm.get('firstName').touched &&
@@ -61,8 +57,6 @@
             class="form-control"
             placeholder="E-Mail"
             formControlName="email"
-            required
-            email
             [ngClass]="{
               'is-invalid':
                 registerForm.get('email').touched &&
@@ -76,6 +70,53 @@
             <span *ngIf="registerForm.get('email').errors?.email">
               L'E-Mail n'est pas valide
             </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-6 mb-3">
+          <label for="phoneId">Telephone</label>
+          <input
+            type="tel"
+            class="form-control"
+            formControlName="phone"
+            placeholder="Numéro de tel"
+            [ngClass]="{ 'is-invalid': !registerForm.get('phone').valid }"
+          />
+          <div class="invalid-feedback">
+            <span *ngIf="registerForm.get('phone').errors?.required">
+              Veuillez entrer votre numéro de télephone.
+            </span>
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>Rececoir les notifications</label>
+          <div class="col-md-8">
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input
+                  type="radio"
+                  value="email"
+                  formControlName="notification"
+                  class="form-check-input"
+                  (click)="setNotificationSetting('email')"
+                />
+                E-Mail
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input
+                  type="radio"
+                  value="text"
+                  formControlName="notification"
+                  class="form-check-input"
+                  (click)="setNotificationSetting('text')"
+                />
+                Texte
+              </label>
+            </div>
           </div>
         </div>
       </div>
