@@ -137,7 +137,7 @@
             }"
           />
           <div class="invalid-feedback">
-            <span *ngIf="registerForm.get('rating').errors.rangeError">
+            <span *ngIf="registerForm.get('rating').errors?.rangeError">
               Notez notre service client sur une échelle de 1 à 5
             </span>
           </div>
