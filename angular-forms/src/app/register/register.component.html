@@ -122,7 +122,27 @@
       </div>
 
       <div class="form-row mb-3">
-        <div class="col-md-12">
+        <div class="col-md-6">
+          <label for="ratingId">Note</label>
+          <input
+            type="number"
+            id="ratingId"
+            class="form-control"
+            formControlName="rating"
+            [ngClass]="{
+              'is-invalid':
+                (registerForm.get('rating').touched ||
+                registerForm.get('rating').dirty) &&
+                  !registerForm.get('rating').valid
+            }"
+          />
+          <div class="invalid-feedback">
+            <span *ngIf="registerForm.get('rating').errors.rangeError">
+              Notez notre service client sur une échelle de 1 à 5
+            </span>
+          </div>
+        </div>
+        <div class="col-md-6">
           <div class="form-check mt-4 pt-3">
             <label for="sendCatalogId" class="form-check-label">
               <input
