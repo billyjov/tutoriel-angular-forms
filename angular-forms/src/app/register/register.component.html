@@ -49,7 +49,7 @@
           </div>
         </div>
       </div>
-      <div class="form-row">
+      <div class="form-row" formGroupName="emailGroup">
         <div class="col-md-6 mb-3">
           <label>E-Mail</label>
           <input
@@ -58,17 +58,40 @@
             placeholder="E-Mail"
             formControlName="email"
             [ngClass]="{
-              'is-invalid':
-                registerForm.get('email').touched &&
-                !registerForm.get('email').valid
+              'is-invalid': registerForm.get('emailGroup').errors ||
+                (registerForm.get('emailGroup.email').touched &&
+                !registerForm.get('emailGroup.email').valid)
             }"
           />
           <div class="invalid-feedback">
-            <span *ngIf="registerForm.get('email').errors?.required">
+            <span *ngIf="registerForm.get('emailGroup.email').errors?.required">
               Entrez votre E-Mail
             </span>
-            <span *ngIf="registerForm.get('email').errors?.email">
+            <span *ngIf="registerForm.get('emailGroup.email').errors?.email">
               L'E-Mail n'est pas valide
+            </span>
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="confirmEmailId">Confirmer l'E-Mail</label>
+          <input
+            type="email"
+            class="form-control"
+            id="confirmEmailId"
+            placeholder="Confirmer l'email(requis)"
+            formControlName="confirmEmail"
+            [ngClass]="{'is-invalid' : registerForm.get('emailGroup').errors || ((
+              registerForm.get('emailGroup.confirmEmail').touched ||
+              registerForm.get('emailGroup.confirmEmail').dirty
+            ) && !registerForm.get('emailGroup.confirmEmail').valid)
+            }"
+          />
+          <div class="invalid-feedback">
+            <span *ngIf="registerForm.get('emailGroup.confirmEmail').errors?.required">
+              merci d'entrer votre E-mail
+            </span>
+            <span *ngIf="registerForm.get('emailGroup').errors?.match">
+              L'E-mail ne correspond pas
             </span>
           </div>
         </div>
@@ -132,8 +155,8 @@
             [ngClass]="{
               'is-invalid':
                 (registerForm.get('rating').touched ||
-                registerForm.get('rating').dirty) &&
-                  !registerForm.get('rating').valid
+                  registerForm.get('rating').dirty) &&
+                !registerForm.get('rating').valid
             }"
           />
           <div class="invalid-feedback">
