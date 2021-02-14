@@ -55,6 +55,10 @@ export class RegisterComponent implements OnInit {
       notification: 'email',
       sendCatalog: false
     });
+
+    this.registerForm.get('notification').valueChanges.subscribe(value => {
+      this.setNotificationSetting(value);
+    });
   }
 
   public saveData() {
