@@ -58,18 +58,11 @@
             placeholder="E-Mail"
             formControlName="email"
             [ngClass]="{
-              'is-invalid': registerForm.get('emailGroup').errors ||
-                (registerForm.get('emailGroup.email').touched &&
-                !registerForm.get('emailGroup.email').valid)
+              'is-invalid': errorMsg
             }"
           />
           <div class="invalid-feedback">
-            <span *ngIf="registerForm.get('emailGroup.email').errors?.required">
-              Entrez votre E-Mail
-            </span>
-            <span *ngIf="registerForm.get('emailGroup.email').errors?.email">
-              L'E-Mail n'est pas valide
-            </span>
+            {{ errorMsg }}
           </div>
         </div>
         <div class="col-md-6 mb-3">

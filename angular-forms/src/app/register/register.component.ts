@@ -39,6 +39,12 @@ export class RegisterComponent implements OnInit {
 
   public registerForm: FormGroup;
   public user: User = new User();
+  public errorMsg: string;
+
+  private validationErrorsMessages = {
+    required: 'Entrez votre E-Mail',
+    email: 'L\'E- Mail n\'est pas valide'
+  };
 
   constructor(private fb: FormBuilder) { }
 
@@ -58,6 +64,12 @@ export class RegisterComponent implements OnInit {
 
     this.registerForm.get('notification').valueChanges.subscribe(value => {
       this.setNotificationSetting(value);
+    });
+
+    const emailControl = this.registerForm.get('emailGroup.email');
+    emailControl.valueChanges.subscribe(val => {
+      console.log(val);
+      this.setMessage(emailControl);
     });
   }
 
@@ -85,6 +97,18 @@ export class RegisterComponent implements OnInit {
     }
 
     phoneControl.updateValueAndValidity();
+
+  }
+
+
+  private setMessage(val: AbstractControl): void {
+    this.errorMsg = '';
+
+    if ((val.touched || val.dirty) && val.errors) {
+      this.errorMsg = Object.keys(val.errors).map(
+        key => this.validationErrorsMessages[key]
+      ).join(' ');
+    }
 
   }
 }
