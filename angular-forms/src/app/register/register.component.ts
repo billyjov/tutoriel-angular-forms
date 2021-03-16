@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  AbstractControl,
+  ValidatorFn,
+  FormArray
+} from '@angular/forms';
 
 import { debounceTime } from 'rxjs/operators';
 
@@ -63,12 +70,7 @@ export class RegisterComponent implements OnInit {
       rating: [null, ratingRangeValidator(1, 5)],
       notification: 'email',
       sendCatalog: true,
-      addressType: ['home'],
-      street1: [''],
-      street2: [''],
-      city: [''],
-      state: [''],
-      zip: [''],
+      addresses: this.fb.array([this.createAddressGroup()])
     });
 
     this.registerForm.get('notification').valueChanges.subscribe(value => {
@@ -109,6 +111,17 @@ export class RegisterComponent implements OnInit {
 
     phoneControl.updateValueAndValidity();
 
+  }
+
+  private createAddressGroup(): FormGroup {
+    return this.fb.group({
+      addressType: ['home'],
+      street1: [''],
+      street2: [''],
+      city: [''],
+      state: [''],
+      zip: [''],
+    });
   }
 
 
