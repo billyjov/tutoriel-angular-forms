@@ -86,6 +86,14 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  public get addressList(): FormArray {
+    return <FormArray>this.registerForm.get('addresses');
+  }
+
+  public addAddress(): void {
+    this.addressList.push(this.createAddressGroup());
+  }
+
   public saveData() {
     console.log(this.registerForm);
     console.log('valeurs: ', JSON.stringify(this.registerForm.value));

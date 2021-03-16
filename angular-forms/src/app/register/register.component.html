@@ -177,8 +177,11 @@
       </div>
 
       <div *ngIf="registerForm.get('sendCatalog').value">
-        <div formArrayName="addresses">
-          <div formGroupName="0">
+        <div
+          formArrayName="addresses"
+          *ngFor="let address of addressList.controls; let i = index"
+        >
+          <div [formGroupName]="i">
             <div class="form-group row mb-2">
               <label class="col-md-2 col-form-label pt-0"> Type </label>
               <div class="col-md-8">
@@ -220,9 +223,10 @@
 
             <div class="form-row mb-3">
               <div class="col-md-12">
-                <label for="">Adresse 1</label>
+                <label attr.for="{{ 'street1Id' + i }}">Adresse 1</label>
                 <input
                   type="text"
+                  id="{{ 'street1Id' + i }}"
                   formControlName="street1"
                   class="form-control"
                 />
@@ -230,9 +234,10 @@
             </div>
             <div class="form-row mb-3">
               <div class="col-md-12">
-                <label for="">Adresse 2</label>
+                <label attr.for="{{ 'street2Id' + i }}">Adresse 2</label>
                 <input
                   type="text"
+                  id="{{ 'street2Id' + i }}"
                   formControlName="street2"
                   class="form-control"
                 />
@@ -241,12 +246,21 @@
 
             <div class="form-row">
               <div class="col-md-6 mb-3">
-                <label for="">Ville</label>
-                <input type="text" class="form-control" formControlName="city" />
+                <label attr.for="{{ 'cityId' + i }}">Ville</label>
+                <input
+                  type="text"
+                  id="{{ 'cityId' + i }}"
+                  class="form-control"
+                  formControlName="city"
+                />
               </div>
               <div class="col-md-3 mb-3">
-                <label for="">Departement</label>
-                <select class="form-control" formControlName="state">
+                <label attr.for="{{ 'stateId' + i }}">Departement</label>
+                <select
+                  id="{{ 'stateId' + i }}"
+                  class="form-control"
+                  formControlName="state"
+                >
                   <option value="">Selectionner un département</option>
                   <option value="A">A</option>
                   <option value="A">B</option>
@@ -255,10 +269,27 @@
                 </select>
               </div>
               <div class="col-md-3 md-3">
-                <label for="">Code postal</label>
-                <input type="number" class="form-control" formControlName="zip" />
+                <label attr.for="{{ 'zipId' + i }}">Code postal</label>
+                <input
+                  type="number"
+                  id="{{ 'zipId' + i }}"
+                  class="form-control"
+                  formControlName="zip"
+                />
               </div>
             </div>
+          </div>
+        </div>
+
+        <div class="form-group row mb-2">
+          <div class="col-md-4">
+            <button
+              class="btn btn-outline-info"
+              type="button"
+              (click)="addAddress()"
+            >
+              Ajouter une adresse
+            </button>
           </div>
         </div>
       </div>
