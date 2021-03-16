@@ -62,7 +62,13 @@ export class RegisterComponent implements OnInit {
       phone: '',
       rating: [null, ratingRangeValidator(1, 5)],
       notification: 'email',
-      sendCatalog: false
+      sendCatalog: true,
+      addressType: ['home'],
+      street1: [''],
+      street2: [''],
+      city: [''],
+      state: [''],
+      zip: [''],
     });
 
     this.registerForm.get('notification').valueChanges.subscribe(value => {

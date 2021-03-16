@@ -73,14 +73,20 @@
             id="confirmEmailId"
             placeholder="Confirmer l'email(requis)"
             formControlName="confirmEmail"
-            [ngClass]="{'is-invalid' : registerForm.get('emailGroup').errors || ((
-              registerForm.get('emailGroup.confirmEmail').touched ||
-              registerForm.get('emailGroup.confirmEmail').dirty
-            ) && !registerForm.get('emailGroup.confirmEmail').valid)
+            [ngClass]="{
+              'is-invalid':
+                registerForm.get('emailGroup').errors ||
+                ((registerForm.get('emailGroup.confirmEmail').touched ||
+                  registerForm.get('emailGroup.confirmEmail').dirty) &&
+                  !registerForm.get('emailGroup.confirmEmail').valid)
             }"
           />
           <div class="invalid-feedback">
-            <span *ngIf="registerForm.get('emailGroup.confirmEmail').errors?.required">
+            <span
+              *ngIf="
+                registerForm.get('emailGroup.confirmEmail').errors?.required
+              "
+            >
               merci d'entrer votre E-mail
             </span>
             <span *ngIf="registerForm.get('emailGroup').errors?.match">
@@ -170,29 +176,52 @@
         </div>
       </div>
 
-      <!-- <div *ngIf="user.sendCatalog">
+      <div *ngIf="registerForm.get('sendCatalog').value">
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label pt-0"> Type </label>
+          <div class="col-md-8">
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input type="radio" formControlName="addressType" value="home" class="form-check-input" />
+                Domicile
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input type="radio" formControlName="addressType" value="work" class="form-check-input" />
+                Lieu de travail
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input type="radio" formControlName="addressType" value="other" class="form-check-input" />
+                Autre
+              </label>
+            </div>
+          </div>
+        </div>
 
         <div class="form-row mb-3">
           <div class="col-md-12">
             <label for="">Adresse 1</label>
-            <input type="text" class="form-control">
+            <input type="text" formControlName="street1" class="form-control" />
           </div>
         </div>
         <div class="form-row mb-3">
           <div class="col-md-12">
             <label for="">Adresse 2</label>
-            <input type="text" class="form-control">
+            <input type="text" formControlName="street2" class="form-control" />
           </div>
         </div>
 
         <div class="form-row">
           <div class="col-md-6 mb-3">
             <label for="">Ville</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" formControlName="city" />
           </div>
           <div class="col-md-3 mb-3">
             <label for="">Departement</label>
-            <select class="form-control">
+            <select class="form-control" formControlName="state">
               <option value="">Selectionner un département</option>
               <option value="A">A</option>
               <option value="A">B</option>
@@ -202,10 +231,10 @@
           </div>
           <div class="col-md-3 md-3">
             <label for="">Code postal</label>
-            <input type="number" class="form-control">
+            <input type="number" class="form-control"  formControlName="zip"/>
           </div>
         </div>
-      </div> -->
+      </div>
 
       <div class="text-right">
         <button
