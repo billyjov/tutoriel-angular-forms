@@ -16,7 +16,7 @@ function ratingRangeValidator(min: number, max: number): ValidatorFn {
   return (c: AbstractControl): { [key: string]: boolean } | null => {
 
     if (c.value !== null && (isNaN(c.value) || c.value < min || c.value > max)) {
-      return { 'rangeError': true };
+      return { rangeError: true };
     }
 
     return null;
@@ -37,7 +37,7 @@ function emailMatcher(c: AbstractControl): { [key: string]: boolean } | null {
     return null;
   }
 
-  return { 'match': true };
+  return { match: true };
 }
 
 @Component({
@@ -87,7 +87,7 @@ export class RegisterComponent implements OnInit {
   }
 
   public get addressList(): FormArray {
-    return <FormArray>this.registerForm.get('addresses');
+    return this.registerForm.get('addresses') as FormArray;
   }
 
   public addAddress(): void {

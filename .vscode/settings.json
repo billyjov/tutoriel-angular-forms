@@ -1,0 +1,3 @@
+{
+    "typescript.tsdk": "./angular-forms/node_modules/typescript/lib"
+}
